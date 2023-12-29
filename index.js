@@ -1,11 +1,12 @@
+//?? form id stored here
 const form = document.getElementById("my-form");
-
+//?? ul id stored here
 const candiesList = document.getElementById("candies");
-//?? render user list every time when browser starts
+//?? render user list on screen every time when browser starts
 document.addEventListener("DOMContentLoaded", function () {
   renderUserList();
 });
-
+//?? when we submit something
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   //?? gett the vales from form inputs
@@ -46,6 +47,7 @@ function renderUserList() {
     .get("https://crudcrud.com/api/688270cf1b86490b834aa16e66c678c7/appData")
     .then((response) => {
       const candies = response.data;
+      console.log(candies);
       candiesList.innerHTML = "";
       //?? iterating over candies using a for each loop
       candies.forEach(function (candy) {
