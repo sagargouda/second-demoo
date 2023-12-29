@@ -17,14 +17,10 @@ form.addEventListener("submit", function (event) {
   //?? storing inputs in form of an  object
   const candy = { ChooseCandy, description, price, quantity };
 
-  // let candies = JSON.parse(localStorage.getItem("candies")) || [];
-
-  // candies.push(candy);
-
   //?? storing in crud crud typical backend stuf by sending it our candy object
   axios
     .post(
-      "https://crudcrud.com/api/d86ea6272f924ccf99d5852893933460/appData",
+      "https://crudcrud.com/api/688270cf1b86490b834aa16e66c678c7/appData",
       candy
     )
     .then((response) => {
@@ -47,7 +43,7 @@ form.addEventListener("submit", function (event) {
 function renderUserList() {
   //?? fetching data from crud crud using get request
   axios
-    .get("https://crudcrud.com/api/d86ea6272f924ccf99d5852893933460/appData")
+    .get("https://crudcrud.com/api/688270cf1b86490b834aa16e66c678c7/appData")
     .then((response) => {
       const candies = response.data;
       candiesList.innerHTML = "";
@@ -76,11 +72,11 @@ function renderUserList() {
               candy.quantity - 1,
               candy.price
             );
-          } else {
-            document.body.innerHTML += "candies completed";
           }
         });
-        li.appendChild(buyOneButton);
+        if (candy.quantity > 0) {
+          li.appendChild(buyOneButton);
+        }
 
         const buyTwoButton = document.createElement("button");
         buyTwoButton.innerHTML = "Buy Two";
@@ -93,11 +89,11 @@ function renderUserList() {
               candy.quantity - 2,
               candy.price
             );
-          } else {
-            document.body.innerHTML += "candies completed";
           }
         });
-        li.appendChild(buyTwoButton);
+        if (candy.quantity > 0) {
+          li.appendChild(buyTwoButton);
+        }
 
         const buyThreeButton = document.createElement("button");
         buyThreeButton.innerHTML = "Buy Three";
@@ -110,11 +106,11 @@ function renderUserList() {
               candy.quantity - 3,
               candy.price
             );
-          } else {
-            document.body.innerHTML += "candies completed";
           }
         });
-        li.appendChild(buyThreeButton);
+        if (candy.quantity > 0) {
+          li.appendChild(buyThreeButton);
+        }
 
         //?? delete functionality
         const deleteButton = document.createElement("button");
@@ -134,7 +130,7 @@ function renderUserList() {
 function deleteUser(id, li) {
   axios
     .delete(
-      `https://crudcrud.com/api/d86ea6272f924ccf99d5852893933460/appData/${id}`
+      `https://crudcrud.com/api/688270cf1b86490b834aa16e66c678c7/appData/${id}`
     )
     .then((response) => {
       li.remove();
@@ -145,7 +141,7 @@ function deleteUser(id, li) {
 function updateDetails(id, ChooseCandy, description, quantity, price) {
   axios
     .put(
-      `https://crudcrud.com/api/d86ea6272f924ccf99d5852893933460/appData/${id}`,
+      `https://crudcrud.com/api/688270cf1b86490b834aa16e66c678c7/appData/${id}`,
       { ChooseCandy, description, price, quantity }
     )
     .then((response) => {
